@@ -1,0 +1,11 @@
+{
+  "en" : {
+    "greet" : "Welcome to the Calculator!",
+    "validName": "Make sure to enter a valid name.",
+    "firstNum" : "What's the first number?"
+  },
+  "es": {
+    "greet": "Bienvenido a la calculadora! Entre su nombre:",
+    "validName": "Asegúrese de entrar un nombre válido."
+  }
+}
