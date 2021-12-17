@@ -1,0 +1,17 @@
+{
+  "breakline": "------------------------------",
+  "greet": "Welcome to the Mortage calculator!",
+  "loanAmount": "Please enter a Loan Amount",
+  "askAPR": "Please enter the Annual Percentage Rate (APR)",
+  "askYears": "How many years do you want to loan the amount for?",
+  "askMonths": "How many months do you want to loan the amount for?",
+  "loanAmtError": "Kindly enter a valid loan amount...",
+  "intRateError": "Kindly enter valid interest rate...",
+  "invalidYrs": "Please enter valid number of years",
+  "invalidMonths": "Please enter valid number of months",
+  "invalidDur": "Please enter a positive loan duration!",
+  "monInterest": "Your monthly payment is ${monPayment.toFixed(2)}",
+  "calAgain": "Do you want to make another calculation? (Yes/No)",
+  "askAgain": "Kindly answer in Yes or No",
+  "thanks": "Thank You for using my calculator!! May the force be with you :)"
+}
