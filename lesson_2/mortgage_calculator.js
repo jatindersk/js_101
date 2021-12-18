@@ -72,7 +72,8 @@ while (true) {
     prompt(`invalidDur`);
   }
 
-  let monPayment = loanAmt * (monIntRate / (1 - Math.pow((1 + monIntRate), (-totalDur))));
+  let monPayment = loanAmt * (
+    monIntRate / (1 - Math.pow((1 + monIntRate), (-totalDur))));
 
   console.log(`Your monthly payment is: $${monPayment.toFixed(2)}`);
   console.log(`Total of ${totalDur} payments amounting to: $${(monPayment * totalDur).toFixed(2)}`);
