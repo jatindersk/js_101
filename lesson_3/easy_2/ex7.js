@@ -1,13 +1,15 @@
-const num1 = [[1]];
-const num2 = [2, [3]];
+let flintstones = { Fred: 0, Wilma: 1,
+  Barney: 2, Betty: 3, Bambam: 4, Pebbles: 5 };
 
-const numbers = num1.concat(num2);
+// Approach 1:
+// let barney = Object.entries(flintstones)[2];
+// console.log(barney);
 
-console.log(numbers);
-// results in [[1], 2, [3]]
+// Approach 2:
+// console.log([].concat(...Object.entries(flintstones).filter(arr => arr[0] === "Barney")));
 
-// modify the first element of num1
-num1[0].push(4);
+// Approach 3:
+console.log(Object.entries(flintstones).filter(arr => arr[0] === "Barney").flat());
 
-console.log(numbers);
-// results in [[1, 4], 2, [3]]
+// Approach 4 (LS):
+Object.entries(flintstones).filter(pair => pair[0] === "Barney").shift();
