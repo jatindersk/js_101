@@ -5,3 +5,14 @@ let munsters = {
   Eddie: { age: 10, gender: 'male' },
   Marilyn: { age: 23, gender: 'female'}
 };
+
+let totalMaleAge = 0;
+
+let valuesArr = Object.values(munsters);
+valuesArr.forEach(el => {
+  if (el.gender === "male") {
+    totalMaleAge += el.age;
+  }
+});
+
+console.log(totalMaleAge);
