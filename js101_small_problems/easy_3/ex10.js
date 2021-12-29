@@ -1,4 +1,6 @@
 let endWith = yr => {
+  if ((yr[yr.length - 2] === '1') && (yr[yr.length - 1] === '1'
+  || yr[yr.length - 1] === '2' || yr[yr.length - 1] === '3')) return `${yr}th`;
 
   switch (yr[yr.length - 1]) {
     case '0':
