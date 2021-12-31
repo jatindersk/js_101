@@ -1,14 +1,5 @@
-let reverseWords = str => {
-  let arr = str.split(' ');
-  let reverseArr = [];
+let reverseSentence = str => str.split(' ').reverse().join(' ');
 
-  arr.forEach(word => {
-    reverseArr.push((word.length >= 5) ? word.split('').reverse().join('') : word);
-  });
-
-  return reverseArr.join(' ');
-};
-
-console.log(reverseWords('Professional'));             // "lanoisseforP"
-console.log(reverseWords('Walk around the block'));    // "Walk dnuora the kcolb"
-console.log(reverseWords('Launch School'));            // "hcnuaL loohcS"
+console.log(reverseSentence(''));                       // ""
+console.log(reverseSentence('Hello World'));            // "World Hello"
+console.log(reverseSentence('Reverse these words'));    // "words these Reverse"
