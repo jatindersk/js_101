@@ -1,0 +1,37 @@
+// algorithm:
+//  - find the next odd number by finding the remainder of
+//  dividing by 2
+//  - check whether the number divides completely by 7
+//  - check whether any digit in the selected number occurs twice
+
+let featured = int => {
+  while (true) {
+    int += 1;
+    if (int % 2 === 1 && int % 7 === 0 && isUnique(int)) {
+      return int;
+    } else if (int === 9876543201) {
+      return "There is no possible number that fulfills those requirements.";
+    }
+  }
+};
+
+function isUnique(num) {
+  let numStr = String(num);
+  for (let idx = 0; idx < numStr - 2; idx += 1) {
+    if (numStr.slice(idx + 1).includes(numStr[idx])) {
+      return undefined;
+    }
+  }
+  return true;
+}
+
+// console.log(featured(12));           // 21
+// console.log(featured(20));           // 21
+// console.log(featured(21));           // 35
+// console.log(featured(997));          // 1029
+// console.log(featured(1029));         // 1043
+// console.log(featured(999999));       // 1023547
+// console.log(featured(999999987));    // 1023456987
+// console.log(featured(9876543186));   // 9876543201
+// console.log(featured(9876543200));   // 9876543201
+console.log(featured(9876543201));   // "There is no possible number that fulfills those requirements."
