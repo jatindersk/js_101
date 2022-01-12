@@ -56,13 +56,13 @@ function hand(cards) {
   return cards.map(card => card[0] + card[1]).join(' ');
 }
 
-function busted(cards) {
-  return total(cards) > 21;
+function busted(playerTotal) {
+  return playerTotal > 21;
 }
 
-function detectResult(dealerCards, playerCards) {
-  let playerTotal = total(playerCards);
-  let dealerTotal = total(dealerCards);
+function detectResult(dealerTotal, playerTotal) {
+  // let playerTotal = total(playerCards);
+  // let dealerTotal = total(dealerCards);
 
   if (playerTotal > 21) {
     return `PLAYER_BUSTED`;
@@ -77,8 +77,8 @@ function detectResult(dealerCards, playerCards) {
   }
 }
 
-function displayResults(dealerCards, playerCards) {
-  let result = detectResult(dealerCards, playerCards);
+function displayResults(dealerTotal, playerTotal) {
+  let result = detectResult(dealerTotal, playerTotal);
 
   switch (result) {
     case 'PLAYER_BUSTED':
@@ -102,7 +102,7 @@ function playAgain() {
   console.log(`======================`);
   prompt(`Play again? (Y)es or (N)o ?`);
   let answer = READLINE.question().toLowerCase();
-  return answer[0] === 'y' || answer === 'n';
+  return answer[0] === 'y';
 }
 
 // Begin Game
@@ -116,8 +116,11 @@ while (true) {
   playerCards.push(...popTwoFromDeck(deck));
   dealerCards.push(...popTwoFromDeck(deck));
 
+  let playerTotal = total(playerCards);
+  let dealerTotal = total(dealerCards);
+
   prompt(`Dealer has ${dealerCards[0]} and ?`);
-  prompt(`You have: ${playerCards[0]} and ${playerCards[1]}, for a total of ${total(playerCards)}.`);
+  prompt(`You have: ${playerCards[0]} and ${playerCards[1]}, for a total of ${playerTotal}.`);
 
   // player turn
   while (true) {
@@ -132,50 +135,52 @@ while (true) {
 
     if (playerTurn === 'h') {
       playerCards.push(deck.pop());
+      playerTotal = total(playerCards);
       prompt(`You chose to hit!`);
       prompt(`Your cards are now: ${hand(playerCards)}`);
-      prompt(`Your total is now: ${total(playerCards)}`);
+      prompt(`Your total is now: ${playerTotal}`);
     }
 
-    if (playerTurn === 's' || busted(playerCards)) break;
+    if (playerTurn === 's' || busted(playerTotal)) break;
   }
 
-  if (busted(playerCards)) {
-    displayResults(dealerCards, playerCards);
+  if (busted(playerTotal)) {
+    displayResults(dealerTotal, playerTotal);
     if (playAgain()) {
       continue;
     } else {
       break;
     }
   } else {
-    prompt(`You stayed at ${total(playerCards)}`);
+    prompt(`You stayed at ${playerTotal}`);
   }
 
   //  dealer turn
   prompt(`Dealer's turn`);
-  while (total(dealerCards) < 17) {
+  while (dealerTotal < 17) {
     prompt(`Dealer hits!`);
     dealerCards.push(deck.pop());
+    dealerTotal = total(dealerCards);
     prompt(`Dealer's cards are now: ${hand(dealerCards)}`);
   }
 
-  if (busted(dealerCards)) {
-    displayResults(dealerCards, playerCards);
+  if (busted(dealerTotal)) {
+    displayResults(dealerTotal, playerTotal);
     if (playAgain()) {
       continue;
     } else {
       break;
     }
   } else {
-    prompt(`Dealer stayed at ${total(dealerCards)}`);
+    prompt(`Dealer stayed at ${dealerTotal}`);
   }
 
   console.log('*********************');
-  prompt(`Dealer has ${dealerCards}, for a total of: ${total(dealerCards)}`);
-  prompt(`Player has ${playerCards}, for a total of: ${total(playerCards)}`);
+  prompt(`Dealer has ${dealerCards}, for a total of: ${dealerTotal}`);
+  prompt(`Player has ${playerCards}, for a total of: ${playerTotal}`);
   console.log('*********************');
 
-  displayResults(dealerCards, playerCards);
+  displayResults(dealerTotal, playerTotal);
 
   if (!playAgain()) break;
 }
