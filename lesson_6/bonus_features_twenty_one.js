@@ -1,6 +1,8 @@
 const SUITS = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
 const VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace'];
 const READLINE = require('readline-sync');
+let playerWins = 0;
+let dealerWins = 0;
 
 function prompt(msg) {
   console.log(`=> ${msg}`);
@@ -12,7 +14,7 @@ function shuffle(cards) {
     let second = Math.floor(Math.random() * (first + 1));
     [cards[first], cards[second]] = [cards[second], cards[first]];
   }
-  console.log(cards);
+  // console.log(cards);
   return cards;
 }
 
@@ -105,6 +107,29 @@ function playAgain() {
   return answer[0] === 'y';
 }
 
+function displayOutput(dealerCards, dealerTotal, playerCards, playerTotal) {
+  console.log('*********************');
+  prompt(`Dealer has ${dealerCards}, for a total of: ${dealerTotal}`);
+  prompt(`Player has ${playerCards}, for a total of: ${playerTotal}`);
+  console.log('*********************');
+}
+
+function checkMatchWinner(dealerWins, playerWins) {
+  if (dealerWins === 5) {
+    prompt(`Dealer wins the round!`);
+    dealerWins = 0;
+    playerWins = 0;
+  } else if (playerWins === 5) {
+    prompt(`Player wins the round!`);
+    dealerWins = 0;
+    playerWins = 0;
+  }
+}
+
+function displayWinCount(playerWins, dealerWins) {
+  prompt(`Player Win Count : ${playerWins}, Dealer Win Count : ${dealerWins}.`);
+}
+
 // Begin Game
 while (true) {
   prompt(`Welcome to Twenty One!`);
@@ -112,6 +137,7 @@ while (true) {
   let deck = initializeDeck();
   let playerCards = [];
   let dealerCards = [];
+  displayWinCount(playerWins, dealerWins);
 
   playerCards.push(...popTwoFromDeck(deck));
   dealerCards.push(...popTwoFromDeck(deck));
@@ -139,13 +165,20 @@ while (true) {
       prompt(`You chose to hit!`);
       prompt(`Your cards are now: ${hand(playerCards)}`);
       prompt(`Your total is now: ${playerTotal}`);
+      displayWinCount(playerWins, dealerWins);
     }
 
     if (playerTurn === 's' || busted(playerTotal)) break;
   }
 
   if (busted(playerTotal)) {
+    dealerWins += 1;
     displayResults(dealerTotal, playerTotal);
+    displayOutput(dealerCards, dealerTotal, playerCards, playerTotal);
+
+    displayWinCount(playerWins, dealerWins);
+    checkMatchWinner(playerWins, dealerWins);
+
     if (playAgain()) {
       continue;
     } else {
@@ -162,10 +195,17 @@ while (true) {
     dealerCards.push(deck.pop());
     dealerTotal = total(dealerCards);
     prompt(`Dealer's cards are now: ${hand(dealerCards)}`);
+    displayWinCount(playerWins, dealerWins);
   }
 
   if (busted(dealerTotal)) {
+    playerWins += 1;
     displayResults(dealerTotal, playerTotal);
+    displayOutput(dealerCards, dealerTotal, playerCards, playerTotal);
+
+    displayWinCount(playerWins, dealerWins);
+    checkMatchWinner(playerWins, dealerWins);
+
     if (playAgain()) {
       continue;
     } else {
@@ -175,11 +215,20 @@ while (true) {
     prompt(`Dealer stayed at ${dealerTotal}`);
   }
 
-  console.log('*********************');
-  prompt(`Dealer has ${dealerCards}, for a total of: ${dealerTotal}`);
-  prompt(`Player has ${playerCards}, for a total of: ${playerTotal}`);
-  console.log('*********************');
+  // console.log('*********************');
+  // prompt(`Dealer has ${dealerCards}, for a total of: ${dealerTotal}`);
+  // prompt(`Player has ${playerCards}, for a total of: ${playerTotal}`);
+  // console.log('*********************');
+  if (playerTotal > dealerTotal || dealerTotal > 21) {
+    playerWins += 1;
+  } else if (dealerTotal > playerTotal || playerTotal > 21) {
+    dealerWins += 1;
+  }
 
+  displayWinCount(playerWins, dealerWins);
+  checkMatchWinner(playerWins, dealerWins);
+
+  displayOutput(dealerCards, dealerTotal, playerCards, playerTotal);
   displayResults(dealerTotal, playerTotal);
 
   if (!playAgain()) break;
