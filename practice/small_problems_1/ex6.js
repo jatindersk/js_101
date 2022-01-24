@@ -4,14 +4,10 @@ let wordToDigit = str => {
     eigth: '8', nine: '9'
   };
 
-  let newStr;
-
   for (let key in numObj) {
-    console.log(`pre: ${key}::: ${newStr}`);
-    newStr = str.replaceAll(key, numObj[key]);
-    console.log(`newStr: ${key}::: ${newStr}`);
+    str = str.replaceAll(key, numObj[key]);
   }
-  return newStr;
+  return str;
 };
 
 console.log(wordToDigit('Please call me at five five five one two three four. Thanks.'));
