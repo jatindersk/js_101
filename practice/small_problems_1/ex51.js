@@ -2,7 +2,7 @@
 //  rules:
 //  - the pattern starts by displaying one star
 //  - it then increments by 2 {1, 3, ... upto n (input number)}
-//  - the number of space characters prepending the star is 
+//  - the number of space characters prepending the star is
 //  initially equal to the (input number) / 2
 //  - the space then decreases by a count of 1
 //  algorithm:
