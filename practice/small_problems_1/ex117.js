@@ -9,6 +9,16 @@ let diamond = count => {
   }
 };
 
+diamond(3);
+// logs
+//  *
+// ***
+//  *
+
+diamond(1);
+// logs
+// *
+
 diamond(9);
 // logs
 //     *
