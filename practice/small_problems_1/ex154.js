@@ -1,5 +1,8 @@
-function nthChar(words) {
+//  extract the letter at nth position in each word
+//  concatenate the extracted letters and return the word
 
+function nthChar(words) {
+  return words.map((word, idx) => word[idx]).join('');
 }
 
 console.log(nthChar([])); // ''
