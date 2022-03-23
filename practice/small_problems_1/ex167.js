@@ -1,23 +1,14 @@
-var maxSpeed = {
-  car: 300, 
-  bike: 60, 
-  motorbike: 200, 
-  airplane: 1000,
-  helicopter: 400, 
-  rocket: 8 * 60 * 60
-};
-var sortable = [];
-for (var vehicle in maxSpeed) {
-  sortable.push([vehicle, maxSpeed[vehicle]]);
+function mineLocation(field) {
+  let result = [];
+  field.forEach((arr, row) => {
+    arr.forEach((el, col) => {
+      if (el === 1) result.push(row, col);
+    });
+  });
+
+  return result;
 }
 
-sortable.sort(function(a, b) {
-  return a[1] - b[1];
-});
-
-var objSorted = {}
-sortable.forEach(function(item){
-    objSorted[item[0]]=item[1]
-})
-
-console.log(objSorted);
+console.log(mineLocation([ [1, 0], [0, 0] ])); // [0, 0]
+console.log(mineLocation([ [1, 0, 0], [0, 0, 0], [0, 0, 0] ])); // [0, 0]
+console.log(mineLocation([ [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 1, 0], [0, 0, 0, 0] ])); // [2, 2]
