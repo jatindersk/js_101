@@ -2,6 +2,7 @@
 //  if the count exists in the result object then just
 //    push the current character to the associated array
 //  otherwise create a new property
+// https://www.codewars.com/kata/543e8390386034b63b001f31
 
 let get_char_count = str => {
   str = str.toLowerCase();
