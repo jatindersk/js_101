@@ -1,4 +1,15 @@
+let isPalindrome = str => {
+  console.log(str === str.split('').reverse().join(''));
+};
 
+function isRealPalindrome(str) {
+  str = str.toLowerCase();
+  str = str.split('').filter(char => {
+    return char.toLowerCase() !== char.toUpperCase();
+  }).join('');
+
+  isPalindrome(str);
+}
 
 isRealPalindrome('madam');               // true
 isRealPalindrome('Madam');               // true (case does not matter)
