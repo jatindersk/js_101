@@ -1,16 +1,29 @@
+// let wordLengths = str => {
+//   if (!str || !str.length) return [];
+//   return str.split(' ').map(word => word + ' ' + word.length);
+// };
 
+function wordLengths(words) {
+  if (arguments.length === 0 || words.length === 0) {
+    return [];
+  }
 
-wordLengths('cow sheep chicken');
+  return words.split(' ').map(function (word) {
+    return word + ' ' + String(word.length);
+  });
+}
+
+console.log(wordLengths('cow sheep chicken'));
 // ["cow 3", "sheep 5", "chicken 7"]
 
-wordLengths('baseball hot dogs and apple pie');
+console.log(wordLengths('baseball hot dogs and apple pie'));
 // ["baseball 8", "hot 3", "dogs 4", "and 3", "apple 5", "pie 3"]
 
-wordLengths("It ain't easy, is it?");
+console.log(wordLengths("It ain't easy, is it?"));
 // ["It 2", "ain't 5", "easy, 5", "is 2", "it? 3"]
 
-wordLengths('Supercalifragilisticexpialidocious');
+console.log(wordLengths('Supercalifragilisticexpialidocious'));
 // ["Supercalifragilisticexpialidocious 34"]
 
-wordLengths('');      // []
-wordLengths();        // []
+console.log(wordLengths(''));      // []
+console.log(wordLengths());        // []
