@@ -12,16 +12,15 @@
 function isBlockWord(str) {
   str = str.toUpperCase();
   let charArr = str.split('');
-  const BLOCKS = ['B:O', 'X:K', 'D:Q', 'C:P', 'N:A', 'G:T', 'R:E', 'F:S', 'J:W', 'H:U', 'V:I', 'L:Y', 'Z:M'];
+  const BLOCKS = ['B:O', 'X:K', 'D:Q', 'C:P', 'N:A', 'G:T', 'R:E',
+    'F:S', 'J:W', 'H:U', 'V:I', 'L:Y', 'Z:M'];
 
   for (let idx = 0; idx < charArr.length; idx += 1) {
-
     let currentChar = charArr[idx];
     let indexFound = returnIndex(BLOCKS, currentChar);
-    console.log(`char is ${currentChar} and indexfound is ${indexFound}`);
+
     if (indexFound >= 0) {
       BLOCKS.splice(indexFound, 1);
-      console.log(BLOCKS);
     } else return false;
   }
   return true;
