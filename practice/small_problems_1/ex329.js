@@ -3,7 +3,35 @@
 // 4th character in every second word converted to
 // uppercase. Other characters should remain the same.
 
+//  input: string, output: string
+//  rules:
+//  - update every 2nd word in the string
+//  - change the 4th character in every 2nd word to uppercase
+//  - leave all other characters as it is
 
+//  algo:
+//  - iterate over the words of the input string
+//  - implement the rules for every 2nd word
+
+function toWeirdCase(str) {
+  let words = str.split(' ');
+
+  let strNew = words.map((word, idx) => {
+    if ((idx + 1) % 2 === 0) return updateWord(word);
+    return word;
+  }).join(' ');
+
+  return strNew;
+}
+
+function updateWord(word) {
+  if (word.length < 4) return word;
+
+  return word.split('').map((char, idx) => {
+    if ((idx + 1) % 4 === 0) return char.toUpperCase();
+    else return char;
+  }).join('');
+}
 
 // Examples:
 console.log(
